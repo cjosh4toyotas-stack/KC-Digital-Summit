@@ -47,13 +47,12 @@
   .scene .scan{position:absolute;inset:0;background:repeating-linear-gradient(to bottom, rgba(255,255,255,.025) 0 1px, transparent 1px 4px);mix-blend-mode:overlay}
   /* Logo slot: drop a transparent-background logo.png next to index.html. It is used as a mask,
      so the logo renders as a blue gradient silhouette floating behind the page. */
-  .scene .logo{position:absolute;left:50%;top:27%;width:min(92vw,720px);aspect-ratio:1496/1032;transform:translate(-50%,-50%);
+  .scene .logo{position:absolute;left:50%;top:40%;width:min(104vw,150vh);aspect-ratio:1476/1012;transform:translate(-50%,-50%);
     background:linear-gradient(160deg,#9cf3ff 0%,#19e6ff 28%,#1f7bff 58%,#2b2cff 85%,#0a1a6b 100%);
     -webkit-mask:url("logo.png") center/contain no-repeat; mask:url("logo.png") center/contain no-repeat;
-    opacity:.6;filter:drop-shadow(0 0 18px rgba(25,230,255,.8)) drop-shadow(0 0 70px rgba(31,123,255,.6));
+    opacity:.55;filter:drop-shadow(0 0 18px rgba(25,230,255,.8)) drop-shadow(0 0 70px rgba(31,123,255,.6));
     animation:float 7s ease-in-out infinite}
-  .scene .logo::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(to bottom, transparent 0 3px, rgba(4,7,15,.35) 3px 4px)}
-  .scene .logo-glow{position:absolute;left:50%;top:27%;width:min(100vw,820px);aspect-ratio:1/1;transform:translate(-50%,-50%);
+  .scene .logo-glow{position:absolute;left:50%;top:40%;width:min(120vw,170vh);aspect-ratio:1/1;transform:translate(-50%,-50%);
     background:radial-gradient(circle, rgba(31,123,255,.28), rgba(25,230,255,.10) 45%, transparent 70%);animation:float 7s ease-in-out infinite}
   @keyframes float{0%,100%{transform:translate(-50%,-50%) translateY(0) rotate(-1.2deg)}50%{transform:translate(-50%,-50%) translateY(-18px) rotate(1.2deg)}}
   @keyframes glide{from{background-position:0 0}to{background-position:0 64px}}
