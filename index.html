@@ -45,16 +45,19 @@
             mask-image:linear-gradient(to top, transparent, #000 10%, #000 60%, transparent);
     animation:glide 9s linear infinite reverse}
   .scene .scan{position:absolute;inset:0;background:repeating-linear-gradient(to bottom, rgba(255,255,255,.025) 0 1px, transparent 1px 4px);mix-blend-mode:overlay}
-  /* Logo slot: drop a logo file in the repo as logo.png (or logo.svg) and it shows up here, digitized. */
-  .scene .logo{position:absolute;left:50%;top:34%;width:min(78vw,520px);aspect-ratio:1/1;transform:translate(-50%,-50%);
-    background:url("logo.png") center/contain no-repeat;opacity:.16;
-    filter:drop-shadow(0 0 14px var(--glow)) drop-shadow(0 0 40px rgba(25,230,255,.6)) saturate(0) brightness(2.2) contrast(1.4);
-    -webkit-mask-image:repeating-linear-gradient(to bottom, #000 0 3px, rgba(0,0,0,.35) 3px 4px), radial-gradient(circle, #000 55%, transparent 72%);
-            mask-image:repeating-linear-gradient(to bottom, #000 0 3px, rgba(0,0,0,.35) 3px 4px), radial-gradient(circle, #000 55%, transparent 72%);
-    -webkit-mask-composite:source-in; mask-composite:intersect;animation:pulse 5s ease-in-out infinite}
+  /* Logo slot: drop a transparent-background logo.png next to index.html. It is used as a mask,
+     so the logo renders as a blue gradient silhouette floating behind the page. */
+  .scene .logo{position:absolute;left:50%;top:36%;width:min(82vw,560px);aspect-ratio:1/1;transform:translate(-50%,-50%);
+    background:linear-gradient(160deg,#9cf3ff 0%,#19e6ff 28%,#1f7bff 58%,#2b2cff 85%,#0a1a6b 100%);
+    -webkit-mask:url("logo.png") center/contain no-repeat; mask:url("logo.png") center/contain no-repeat;
+    opacity:.42;filter:drop-shadow(0 0 18px rgba(25,230,255,.7)) drop-shadow(0 0 60px rgba(31,123,255,.5));
+    animation:float 7s ease-in-out infinite}
+  .scene .logo::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(to bottom, transparent 0 3px, rgba(4,7,15,.35) 3px 4px)}
+  .scene .logo-glow{position:absolute;left:50%;top:36%;width:min(90vw,640px);aspect-ratio:1/1;transform:translate(-50%,-50%);
+    background:radial-gradient(circle, rgba(31,123,255,.28), rgba(25,230,255,.10) 45%, transparent 70%);animation:float 7s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translate(-50%,-50%) translateY(0) rotate(-1.2deg)}50%{transform:translate(-50%,-50%) translateY(-18px) rotate(1.2deg)}}
   @keyframes glide{from{background-position:0 0}to{background-position:0 64px}}
-  @keyframes pulse{0%,100%{opacity:.14}50%{opacity:.22}}
-  @media (prefers-reduced-motion:reduce){.scene .floor,.scene .ceil,.scene .logo{animation:none}}
+  @media (prefers-reduced-motion:reduce){.scene .floor,.scene .ceil,.scene .logo,.scene .logo-glow{animation:none}}
 
   .wrap{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:32px 16px 64px}
   .eyebrow{color:var(--accent2);font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;text-shadow:0 0 12px rgba(25,230,255,.6)}
@@ -95,6 +98,7 @@
 <div class="scene" aria-hidden="true">
   <div class="stars"></div>
   <div class="ceil"></div>
+  <div class="logo-glow"></div>
   <div class="logo"></div>
   <div class="horizon"></div>
   <div class="floor"></div>
