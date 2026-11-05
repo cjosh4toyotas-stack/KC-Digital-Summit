@@ -3,23 +3,66 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#140d14">
+<meta name="theme-color" content="#04070f">
 <title>Kansas City, Nov 18–19</title>
 <meta name="description" content="Two days in downtown Kansas City: hotel, schedule, and where everything is.">
 <style>
   :root{
-    --bg:#140d14; --card:#1e141f; --card2:#25182a; --line:#3a2a3e;
-    --text:#f3ecf3; --muted:#b9a7bd; --accent:#ff6b7a; --accent2:#ffb3a7; --free:#7ad9a0;
+    --bg:#04070f; --card:rgba(8,14,28,.82); --card2:rgba(14,24,44,.9); --line:rgba(25,230,255,.28);
+    --text:#eaf6ff; --muted:#8fb3c7; --accent:#ff2a3c; --accent2:#19e6ff; --free:#7af0b0; --glow:#19e6ff;
   }
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:640px;margin:0 auto;padding:32px 16px 64px}
-  .eyebrow{color:var(--accent);font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
-  h1{font-size:40px;line-height:1.05;margin:8px 0 4px;letter-spacing:-.02em}
-  h1 em{font-style:normal;color:var(--accent2)}
+  body{position:relative;overflow-x:hidden}
+
+  /* ---- Tron backdrop ---- */
+  .scene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:
+    radial-gradient(ellipse 80% 45% at 50% 38%, rgba(25,230,255,.16), transparent 60%),
+    linear-gradient(#04070f 0%, #060b1a 45%, #04070f 100%)}
+  .scene .stars{position:absolute;inset:0;background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(25,230,255,.7), transparent 60%),
+    radial-gradient(1px 1px at 72% 9%, rgba(255,255,255,.55), transparent 60%),
+    radial-gradient(1.5px 1.5px at 88% 28%, rgba(25,230,255,.5), transparent 60%),
+    radial-gradient(1px 1px at 34% 6%, rgba(255,255,255,.4), transparent 60%),
+    radial-gradient(1px 1px at 56% 22%, rgba(25,230,255,.6), transparent 60%),
+    radial-gradient(1px 1px at 8% 40%, rgba(255,255,255,.35), transparent 60%),
+    radial-gradient(1.5px 1.5px at 94% 44%, rgba(25,230,255,.45), transparent 60%)}
+  .scene .floor{position:absolute;left:-50%;right:-50%;top:52%;height:120%;transform-origin:50% 0;transform:perspective(520px) rotateX(64deg);
+    background-image:
+      linear-gradient(to right, rgba(25,230,255,.55) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(25,230,255,.55) 1px, transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:linear-gradient(to bottom, transparent, #000 10%, #000 70%, transparent);
+            mask-image:linear-gradient(to bottom, transparent, #000 10%, #000 70%, transparent);
+    animation:glide 6s linear infinite;filter:drop-shadow(0 0 6px rgba(25,230,255,.6))}
+  .scene .horizon{position:absolute;left:0;right:0;top:52%;height:2px;background:linear-gradient(to right, transparent, var(--glow) 25%, #fff 50%, var(--glow) 75%, transparent);box-shadow:0 0 18px 4px rgba(25,230,255,.55), 0 0 60px 10px rgba(25,230,255,.25)}
+  .scene .ceil{position:absolute;left:-50%;right:-50%;bottom:48%;height:120%;transform-origin:50% 100%;transform:perspective(520px) rotateX(-64deg);
+    background-image:
+      linear-gradient(to right, rgba(25,230,255,.22) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(25,230,255,.22) 1px, transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:linear-gradient(to top, transparent, #000 10%, #000 60%, transparent);
+            mask-image:linear-gradient(to top, transparent, #000 10%, #000 60%, transparent);
+    animation:glide 9s linear infinite reverse}
+  .scene .scan{position:absolute;inset:0;background:repeating-linear-gradient(to bottom, rgba(255,255,255,.025) 0 1px, transparent 1px 4px);mix-blend-mode:overlay}
+  /* Logo slot: drop a logo file in the repo as logo.png (or logo.svg) and it shows up here, digitized. */
+  .scene .logo{position:absolute;left:50%;top:34%;width:min(78vw,520px);aspect-ratio:1/1;transform:translate(-50%,-50%);
+    background:url("logo.png") center/contain no-repeat;opacity:.16;
+    filter:drop-shadow(0 0 14px var(--glow)) drop-shadow(0 0 40px rgba(25,230,255,.6)) saturate(0) brightness(2.2) contrast(1.4);
+    -webkit-mask-image:repeating-linear-gradient(to bottom, #000 0 3px, rgba(0,0,0,.35) 3px 4px), radial-gradient(circle, #000 55%, transparent 72%);
+            mask-image:repeating-linear-gradient(to bottom, #000 0 3px, rgba(0,0,0,.35) 3px 4px), radial-gradient(circle, #000 55%, transparent 72%);
+    -webkit-mask-composite:source-in; mask-composite:intersect;animation:pulse 5s ease-in-out infinite}
+  @keyframes glide{from{background-position:0 0}to{background-position:0 64px}}
+  @keyframes pulse{0%,100%{opacity:.14}50%{opacity:.22}}
+  @media (prefers-reduced-motion:reduce){.scene .floor,.scene .ceil,.scene .logo{animation:none}}
+
+  .wrap{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:32px 16px 64px}
+  .eyebrow{color:var(--accent2);font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;text-shadow:0 0 12px rgba(25,230,255,.6)}
+  h1{font-size:40px;line-height:1.05;margin:8px 0 4px;letter-spacing:-.02em;text-shadow:0 0 24px rgba(25,230,255,.25)}
+  h1 em{font-style:normal;color:var(--accent2);text-shadow:0 0 18px rgba(25,230,255,.7)}
   .sub{color:var(--muted);font-size:17px;margin:0 0 28px}
-  h2{font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:36px 0 12px;font-weight:700}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px;margin-bottom:12px}
+  h2{font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);margin:36px 0 12px;font-weight:700;text-shadow:0 0 10px rgba(25,230,255,.5)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px;margin-bottom:12px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 0 0 1px rgba(25,230,255,.06), 0 0 24px rgba(25,230,255,.10), inset 0 1px 0 rgba(255,255,255,.04)}
   .card h3{margin:0 0 6px;font-size:20px}
   .card p{margin:6px 0;color:var(--text)}
   .card .m{color:var(--muted)}
@@ -27,28 +70,36 @@
   .kv{flex:1 1 120px;background:var(--card2);border-radius:12px;padding:10px 12px}
   .kv b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
   .kv span{font-size:17px;font-weight:600}
-  a{color:var(--accent2);text-decoration:none;border-bottom:1px solid rgba(255,179,167,.35)}
+  a{color:var(--accent2);text-decoration:none;border-bottom:1px solid rgba(25,230,255,.35)}
   a:hover{border-bottom-color:var(--accent2)}
   .tl{list-style:none;margin:0;padding:0}
   .tl li{display:grid;grid-template-columns:86px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
   .tl li:first-child{border-top:0}
-  .tl time{color:var(--accent2);font-weight:700;font-size:15px;padding-top:2px;white-space:nowrap}
+  .tl time{color:var(--accent2);font-weight:700;font-size:15px;padding-top:2px;white-space:nowrap;text-shadow:0 0 8px rgba(25,230,255,.5)}
   .tl b{display:block;font-size:16px}
   .tl small{display:block;color:var(--muted);font-size:14px;margin-top:2px}
   .free time{color:var(--free)}
   .free b{color:var(--free)}
   .tag{display:inline-block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:3px 8px;border-radius:999px;background:rgba(122,217,160,.14);color:var(--free);margin-left:6px;vertical-align:middle}
-  .tag.busy{background:rgba(255,107,122,.14);color:var(--accent)}
+  .tag.busy{background:rgba(255,42,60,.16);color:#ff6b7a}
   ul.plain{margin:8px 0 0;padding-left:18px}
   ul.plain li{margin:4px 0}
   .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-  .btn{display:inline-block;background:var(--accent);color:#1a0a0f;font-weight:700;padding:12px 16px;border-radius:12px;border:0;font-size:15px}
-  .btn.ghost{background:transparent;color:var(--accent2);border:1px solid var(--line)}
+  .btn{display:inline-block;background:var(--accent2);color:#03121a;font-weight:700;padding:12px 16px;border-radius:12px;border:0;font-size:15px;box-shadow:0 0 16px rgba(25,230,255,.45)}
+  .btn.ghost{background:transparent;color:var(--accent2);border:1px solid var(--accent2);box-shadow:0 0 12px rgba(25,230,255,.25)}
   .note{font-size:14px;color:var(--muted)}
   footer{margin-top:40px;color:var(--muted);font-size:13px;text-align:center}
 </style>
 </head>
 <body>
+<div class="scene" aria-hidden="true">
+  <div class="stars"></div>
+  <div class="ceil"></div>
+  <div class="logo"></div>
+  <div class="horizon"></div>
+  <div class="floor"></div>
+  <div class="scan"></div>
+</div>
 <div class="wrap">
 
   <div class="eyebrow">Wed Nov 18 – Thu Nov 19, 2026</div>
